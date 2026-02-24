@@ -2,7 +2,6 @@
 
 import React, { useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import GranularCursorEffect from './GranularCursorEffect';
 
 export default function Hero() {
     const cursorRef = useRef({ x: 0, y: 0, active: false });
@@ -27,20 +26,7 @@ export default function Hero() {
             onMouseLeave={onMouseLeave}
         >
 
-            {/* Cursor-reactive granular background (antigravity-style circular motion) */}
-            <GranularCursorEffect cursorRef={cursorRef} />
-
             {/* Floating Elements (Background) */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="absolute left-[10%] top-[30%] flex items-center gap-2 bg-purple-100 text-purple-900 px-3 py-1.5 rounded-full text-sm font-medium shadow-sm border border-purple-200"
-            >
-                <div className="w-5 h-5 rounded-full bg-purple-400 border border-white" />
-                Maria
-            </motion.div>
-
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -75,12 +61,9 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="text-xl text-gray-600 mb-8"
+                    className="text-xl text-gray-600 mb-8 max-w-4xl mx-auto text-center"
                 >
-                    Talk to us today for empowering businesses to harness transformation.{" "}
-                    Empowering businesses to harness the transformative power of artificial
-                    intelligence. From strategy to implementation, we deliver intelligent
-                    solutions that drive real results.
+                    Talk to us today for empowering businesses to harness the transformative power of artificial intelligence. From strategy to implementation, we deliver intelligent solutions that drive real results.
                 </motion.p>
 
                 <motion.div
@@ -104,19 +87,19 @@ export default function Hero() {
                     transition={{ delay: 0.4, duration: 0.8 }}
                     className="w-full bg-[#111] rounded-[2rem] h-[360px] md:h-[400px] flex items-center justify-center relative overflow-hidden shadow-2xl"
                 >
-                {/* Play button overlay */}
-                <div className="absolute w-20 h-20 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center cursor-pointer border border-white/10 hover:scale-105 transition-transform">
-                    <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-2" />
-                </div>
+                    {/* Play button overlay */}
+                    <div className="absolute w-20 h-20 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center cursor-pointer border border-white/10 hover:scale-105 transition-transform">
+                        <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-2" />
+                    </div>
 
-                <div className="text-center font-black text-6xl md:text-8xl text-white leading-none tracking-tighter opacity-90">
-                    GET<br />GREAT<br />DONE.
-                </div>
+                    <div className="text-center font-black text-6xl md:text-8xl text-white leading-none tracking-tighter opacity-90">
+                        GET<br />GREAT<br />DONE.
+                    </div>
 
-                {/* Bottom floating logo on card */}
-                <div className="absolute bottom-6 bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 font-bold text-xl">
-                    <img src="/logo.png" alt="Kriyantrai Logo" className="h-6 w-auto" />
-                </div>
+                    {/* Bottom floating logo on card */}
+                    <div className="absolute bottom-6 bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 font-bold text-xl">
+                        <img src="/logo.png" alt="Kriyantrai Logo" className="h-6 w-auto" />
+                    </div>
                 </motion.div>
             </div>
 

@@ -7,6 +7,8 @@ const antigravityFont = Outfit({
   subsets: ["latin"],
 });
 
+import InteractiveBackground from "@/components/InteractiveBackground";
+
 export const metadata: Metadata = {
   title: "Kriyantrai Workspace",
   description: "Collaborative workspace by Kriyantrai",
@@ -23,6 +25,7 @@ export default function RootLayout({
         className={`${antigravityFont.variable} antialiased`}
         suppressHydrationWarning
       >
+        <InteractiveBackground />
         {children}
       </body>
     </html>
