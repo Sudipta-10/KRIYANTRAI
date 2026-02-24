@@ -1,51 +1,108 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
 const SERVICES = [
   {
-    title: "Artificial Intelligence",
+    title: "AI",
     description: "Accelerate your team with collaborative AI workflows",
     image: "https://framerusercontent.com/images/qktnranaPpFcKWyM60NJD9VvI.png?width=1920&height=1080",
-    href: "#",
+    href: "https://miro.com/ai/ai-overview",
   },
   {
-    title: "Data Solutions",
-    description: "Empower decisions with unified, actionable data",
+    title: "Intelligent Canvas",
+    description: "Empower teamwork on one, infinite, multiplayer canvas",
     image: "https://framerusercontent.com/images/Yuc5oFlUGxrhIlp7DDzijhyh3k.png?width=3840&height=2160",
-    href: "#",
+    href: "https://miro.com/intelligent-canvas",
   },
   {
-    title: "Process Automation",
-    description: "Move quickly from ideas to structured plans and execution",
+    title: "Formats",
+    description:
+      "Move quickly from ideas to structured plans and work with Docs, Tables, Slides, Diagrams and more",
     image: "https://framerusercontent.com/images/jEBfMRQ9CEbwCHlIsSZ8arK5Jt0.png?width=3840&height=2160",
-    href: "#",
+    href: "https://miro.com/intelligent-canvas/#formats",
   },
   {
-    title: "Generative AI Services",
-    description: "Automate key processes with scalable, repeatable workflows",
+    title: "Blueprints",
+    description: "Automate key processes and ensure your workflows are scalable, repeatable, and efficient",
     image: "https://framerusercontent.com/images/UE6PN5AkKpZr9wiHr9XmecEwBe8.png?width=3840&height=2160",
-    href: "#",
+    href: "https://miro.com/capabilities/blueprints",
   },
   {
-    title: "Business Intelligence",
-    description: "Secure and scalable insights on a platform you can trust",
+    title: "Enterprise Security & Scale",
+    description: "Secure and scalable collaboration on an enterprise-grade platform you can trust",
     image: "https://framerusercontent.com/images/t6nXozqt1IQNpt1ZoXulrivOM.png?width=3840&height=2160",
-    href: "#",
+    href: "https://miro.com/enterprise-security",
   },
   {
-    title: "Application Development",
-    description: "Connects with your stack so teams stay aligned and productive",
+    title: "Integrations",
+    description: "Connects with 250+ apps so teams stay aligned and productive in one scalable, secure workspace.",
     image: "https://framerusercontent.com/images/wIqLXdrx2cUUItCcoSjzFjBMQ.png?width=1921&height=1080",
-    href: "#",
+    href: "https://miro.com/integrations",
   },
 ];
 
 export default function SolutionsShowcaseSection() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isStuck, setIsStuck] = useState(false);
+  const isStuckRef = useRef(false);
+  useEffect(() => {
+    isStuckRef.current = isStuck;
+  }, [isStuck]);
+
+  // Detect when section is stuck (below navbar)
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsStuck(entry.boundingClientRect.top <= 65);
+      },
+      { threshold: 0, rootMargin: "-64px 0px 0px 0px" }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  // When stuck: vertical wheel scrolls horizontal strip; at end/start allow vertical scroll.
+  // Attach to scroll container with capture so we intercept before browser scrolls.
+  useEffect(() => {
+    const scrollEl = scrollRef.current;
+    if (!scrollEl) return;
+
+    const onWheel = (e: WheelEvent) => {
+      if (!isStuckRef.current) return;
+      const maxScroll = scrollEl.scrollWidth - scrollEl.clientWidth;
+      if (maxScroll <= 0) return;
+      const { scrollLeft } = scrollEl;
+      const atStart = scrollLeft <= 0;
+      const atEnd = scrollLeft >= maxScroll - 2;
+
+      if (e.deltaY > 0) {
+        if (atEnd) return;
+        e.preventDefault();
+        e.stopPropagation();
+        scrollEl.scrollLeft += e.deltaY;
+      } else {
+        if (atStart) return;
+        e.preventDefault();
+        e.stopPropagation();
+        scrollEl.scrollLeft += e.deltaY;
+      }
+    };
+
+    scrollEl.addEventListener("wheel", onWheel, { passive: false, capture: true });
+    return () => scrollEl.removeEventListener("wheel", onWheel, { capture: true } as EventListenerOptions);
+  }, []);
+
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden bg-(--background) z-10 border-0">
+    <section
+      ref={sectionRef}
+      className="sticky top-16 pt-0 pb-24 md:pb-32 bg-transparent z-10 border-0"
+    >
       <div className="w-full">
         <div className="px-6 mb-10">
           <motion.h2
@@ -59,7 +116,10 @@ export default function SolutionsShowcaseSection() {
         </div>
 
         {/* Scroll track - Framer-style horizontal scroll */}
-        <div className="overflow-x-auto overflow-y-hidden snap-x snap-mandatory">
+        <div
+          ref={scrollRef}
+          className="overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-hide"
+        >
           <div className="flex gap-6 pl-6 pr-6 pb-4 min-w-max" style={{ borderBottomWidth: 0 }}>
             {SERVICES.map((service, index) => (
               <motion.div
@@ -106,7 +166,7 @@ export default function SolutionsShowcaseSection() {
                     <div>
                       <Link
                         href={service.href}
-                        className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-[rgb(28,28,30)] border border-[rgb(28,28,30)] hover:bg-[rgb(40,40,42)] transition-colors"
+                        className="inline-flex items-center justify-center px-5 py-2.5 rounded-lg text-sm font-semibold text-gray-900 bg-white/90 backdrop-blur-sm border border-gray-300 hover:bg-white transition-colors"
                         style={{
                           letterSpacing: "-0.01em",
                           lineHeight: "150%",
