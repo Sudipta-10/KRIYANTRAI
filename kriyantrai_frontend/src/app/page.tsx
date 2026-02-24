@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import SolutionsShowcaseSection from "@/components/SolutionsShowcaseSection";
 import TrustSection from "@/components/TrustSection";
 import FlowSection from "@/components/FlowSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -15,6 +16,7 @@ export default function Home() {
     <main className="min-h-screen relative overflow-x-hidden">
       <Navbar />
       <Hero />
+      <SolutionsShowcaseSection />
       <TrustSection />
       <FlowSection />
       <TestimonialsSection />
