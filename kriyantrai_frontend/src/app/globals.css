@@ -7,6 +7,22 @@
   --font-sans: var(--font-antigravity), ui-sans-serif, system-ui, sans-serif;
 }
 
+.animate-slow-pulse {
+  animation: slowPulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes slowPulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
 :root {
   --background: #fdfdfd;
   --foreground: #050038;

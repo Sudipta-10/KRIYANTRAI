@@ -57,10 +57,10 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     className="tracking-tight mb-8 flex flex-col items-center justify-center text-center w-full leading-[1.2]"
                 >
-                    <span className="text-5xl md:text-5xl font-bold text-black mb-2">
-                        Powering the next era of
+                    <span className="text-3xl md:text-4xl font-bold text-black mb-2 uppercase tracking-wide">
+                        POWERING THE NEXT ERA OF
                     </span>
-                    <span className="text-10xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#F67112] to-[#A1F9F3] animate-pulse mb-6 pb-2">
+                    <span className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#F67112] to-[#A1F9F3] animate-slow-pulse mb-6 pb-2">
                         AI EXCELLENCE
                     </span>
                     <span className="text-8xl md:text-5xl font-bold text-black mb-2">
