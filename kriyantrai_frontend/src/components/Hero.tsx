@@ -1,11 +1,34 @@
 "use client";
 
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import GranularCursorEffect from './GranularCursorEffect';
 
 export default function Hero() {
+    const cursorRef = useRef({ x: 0, y: 0, active: false });
+
+    const onMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        cursorRef.current = {
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+            active: true,
+        };
+    }, []);
+
+    const onMouseLeave = useCallback(() => {
+        cursorRef.current.active = false;
+    }, []);
+
     return (
-        <section className="relative pt-24 pb-16 px-6 overflow-hidden flex flex-col items-center">
+        <section
+            className="relative pt-24 pb-16 px-6 overflow-hidden flex flex-col items-center"
+            onMouseMove={onMouseMove}
+            onMouseLeave={onMouseLeave}
+        >
+
+            {/* Cursor-reactive granular background (antigravity-style circular motion) */}
+            <GranularCursorEffect cursorRef={cursorRef} />
 
             {/* Floating Elements (Background) */}
             <motion.div
