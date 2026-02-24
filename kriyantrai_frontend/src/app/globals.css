@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2563EB;
+  /* Vibrant Blue */
+  --color-primary-hover: #1D4ED8;
+  --font-sans: var(--font-antigravity), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --background: #fdfdfd;
+  --foreground: #050038;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  /* Grained white background with dot grid */
+  background-image: url('/bg-pattern.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
