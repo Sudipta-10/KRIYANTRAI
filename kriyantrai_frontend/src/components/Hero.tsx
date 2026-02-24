@@ -55,9 +55,20 @@ export default function Hero() {
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-5xl md:text-7xl font-bold tracking-tight text-foreground mb-6 leading-[1.1]"
+                    className="tracking-tight mb-8 flex flex-col items-center justify-center text-center w-full leading-[1.2]"
                 >
-                    Get from brainstorm to<br />breakthrough with Kriyantrai
+                    <span className="text-3xl md:text-4xl font-bold text-black mb-2">
+                        Powering the next era of
+                    </span>
+                    <span className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#F67112] to-[#A1F9F3] animate-pulse mb-6 pb-2">
+                        AI EXCELLENCE
+                    </span>
+                    <span className="text-4xl md:text-5xl font-bold text-black mb-2">
+                        BUILD FASTER
+                    </span>
+                    <span className="text-4xl md:text-5xl font-bold text-black">
+                        AUTOMATE SMARTER
+                    </span>
                 </motion.h1>
 
                 <motion.p
