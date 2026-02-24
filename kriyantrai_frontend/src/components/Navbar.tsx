@@ -19,12 +19,40 @@ export default function Navbar() {
 
                     {/* Nav links - center */}
                     <div className="hidden lg:flex items-center justify-center gap-6 text-sm font-medium text-black flex-1">
-                        <Link href="#" className="hover:text-primary transition-colors">
-                            Products
-                        </Link>
                         <Link href="#" className="hover:text-primary transition-colors flex items-center gap-1">
-                            Solutions <span className="text-black/60 text-xs">▼</span>
+                            Products 
                         </Link>
+                        <div className="relative group">
+                            <Link href="#" className="hover:text-primary transition-colors flex items-center gap-1">
+                                Solutions
+                                <span className="transition-transform duration-200 group-hover:-rotate-180">
+                                    <svg
+                                        className="w-3 h-3"
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M5 7.5L10 12.5L15 7.5"
+                                            stroke="currentColor"
+                                            strokeWidth="1.5"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                </span>
+                            </Link>
+                            <div className="absolute left-0 top-full mt-3 w-56 rounded-xl bg-white/95 shadow-lg border border-gray-200 py-3 px-3 text-sm text-gray-800 hidden group-hover:block">
+                                <div className="flex flex-col gap-1.5 text-left">
+                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Artificial Intelligence</button>
+                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Data Solutions</button>
+                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Process Automation</button>
+                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Generative AI Services</button>
+                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Application Development</button>
+                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Business Intelligence</button>
+                                </div>
+                            </div>
+                        </div>
                         <Link href="#" className="hover:text-primary transition-colors">
                             About Us
                         </Link>

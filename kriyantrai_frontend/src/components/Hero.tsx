@@ -33,7 +33,7 @@ export default function Hero() {
                 transition={{ delay: 0.7, duration: 0.8 }}
                 className="absolute right-[15%] top-[70%] flex items-center gap-2 bg-white px-4 py-2 rounded-full text-sm font-semibold shadow-md border border-gray-200 text-gray-800"
             >
-                <span className="text-primary">✨</span> Kriyantrai AI
+                <span className="text-primary">✨</span> KRIYANTRAI
             </motion.div>
 
             {/* Main Content + Card, vertically centered in viewport */}
@@ -80,27 +80,6 @@ export default function Hero() {
                     </button>
                 </motion.div>
 
-                {/* Decorative Black Card Block */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.8 }}
-                    className="w-full bg-[#111] rounded-[2rem] h-[360px] md:h-[400px] flex items-center justify-center relative overflow-hidden shadow-2xl"
-                >
-                    {/* Play button overlay */}
-                    <div className="absolute w-20 h-20 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center cursor-pointer border border-white/10 hover:scale-105 transition-transform">
-                        <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-2" />
-                    </div>
-
-                    <div className="text-center font-black text-6xl md:text-8xl text-white leading-none tracking-tighter opacity-90">
-                        GET<br />GREAT<br />DONE.
-                    </div>
-
-                    {/* Bottom floating logo on card */}
-                    <div className="absolute bottom-6 bg-primary text-white px-4 py-2 rounded-lg flex items-center gap-2 font-bold text-xl">
-                        <img src="/logo.png" alt="Kriyantrai Logo" className="h-6 w-auto" />
-                    </div>
-                </motion.div>
             </div>
 
         </section>
