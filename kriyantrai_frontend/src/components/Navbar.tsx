@@ -42,14 +42,14 @@ export default function Navbar() {
                                     </svg>
                                 </span>
                             </Link>
-                            <div className="absolute left-0 top-full mt-3 w-56 rounded-xl bg-white/95 shadow-lg border border-gray-200 py-3 px-3 text-sm text-gray-800 hidden group-hover:block">
+                            <div className="absolute left-0 top-full mt-3 w-56 rounded-xl bg-white/95 shadow-lg border border-gray-200 py-3 px-3 text-sm text-gray-800 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
                                 <div className="flex flex-col gap-1.5 text-left">
-                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Artificial Intelligence</button>
-                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Data Solutions</button>
-                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Process Automation</button>
-                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Generative AI Services</button>
-                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Application Development</button>
-                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Business Intelligence</button>
+                                    <Link href="/solutions/artificial-intelligence" className="block w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-[#153776] transition-colors">Artificial Intelligence</Link>
+                                    <Link href="/solutions/data-solutions" className="block w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-[#153776] transition-colors">Data Solutions</Link>
+                                    <Link href="/solutions/process-automation" className="block w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-[#153776] transition-colors">Process Automation</Link>
+                                    <Link href="/solutions/generative-ai-services" className="block w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-[#153776] transition-colors">Generative AI Services</Link>
+                                    <Link href="/solutions/business-intelligence" className="block w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-[#153776] transition-colors">Business Intelligence</Link>
+                                    <Link href="/solutions/application-development" className="block w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100 hover:text-[#153776] transition-colors">Application Development</Link>
                                 </div>
                             </div>
                         </div>
