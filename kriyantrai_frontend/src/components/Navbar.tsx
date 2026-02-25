@@ -61,7 +61,7 @@ export default function Navbar() {
 
                     {/* Right Actions */}
                     <div className="flex items-center justify-end gap-5 text-sm font-medium text-black flex-1">
-                        <Link href="#" className="hidden md:block hover:text-primary transition-colors">Careers</Link>
+                        <Link href="/career" className="hidden md:block hover:text-primary transition-colors">Careers</Link>
                         <Link
                             href="/contact/sales"
                             className="hidden md:block px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition-colors"
