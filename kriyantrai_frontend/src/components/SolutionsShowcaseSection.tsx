@@ -53,84 +53,89 @@ export default function SolutionsShowcaseSection() {
     isStuckRef.current = isStuck;
   }, [isStuck]);
 
-  // Detect when section is stuck (below navbar)
+  // Detect when section is stuck (below navbar) with hysteresis to avoid flicker
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsStuck(entry.boundingClientRect.top <= 65);
+        const top = entry.boundingClientRect.top;
+        setIsStuck((prev) => {
+          if (top <= 66) return true;
+          if (top > 72) return false;
+          return prev;
+        });
       },
-      { threshold: 0, rootMargin: "-64px 0px 0px 0px" }
+      { threshold: [0, 0.01, 1], rootMargin: "-64px 0px 0px 0px" }
     );
     observer.observe(section);
     return () => observer.disconnect();
   }, []);
 
   // When stuck: vertical wheel scrolls horizontal strip; at end/start allow vertical scroll.
-  // Attach to scroll container with capture so we intercept before browser scrolls.
+  // Attach to section so wheel works whether cursor is over title or cards.
   useEffect(() => {
+    const section = sectionRef.current;
     const scrollEl = scrollRef.current;
-    if (!scrollEl) return;
+    if (!section || !scrollEl) return;
 
     const onWheel = (e: WheelEvent) => {
       if (!isStuckRef.current) return;
       const maxScroll = scrollEl.scrollWidth - scrollEl.clientWidth;
       if (maxScroll <= 0) return;
       const { scrollLeft } = scrollEl;
-      const atStart = scrollLeft <= 0;
-      const atEnd = scrollLeft >= maxScroll - 2;
+      const atStart = scrollLeft <= 1;
+      const atEnd = scrollLeft >= maxScroll - 1;
 
-      if (e.deltaY > 0) {
+      if (e.deltaY < 0) {
         if (atEnd) return;
         e.preventDefault();
         e.stopPropagation();
-        scrollEl.scrollLeft += e.deltaY;
+        scrollEl.scrollLeft = Math.min(scrollEl.scrollLeft - e.deltaY, maxScroll);
       } else {
         if (atStart) return;
         e.preventDefault();
         e.stopPropagation();
-        scrollEl.scrollLeft += e.deltaY;
+        scrollEl.scrollLeft = Math.max(0, scrollEl.scrollLeft - e.deltaY);
       }
     };
 
-    scrollEl.addEventListener("wheel", onWheel, { passive: false, capture: true });
-    return () => scrollEl.removeEventListener("wheel", onWheel, { capture: true } as EventListenerOptions);
+    section.addEventListener("wheel", onWheel, { passive: false, capture: true });
+    return () => section.removeEventListener("wheel", onWheel, { capture: true } as EventListenerOptions);
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="sticky top-16 pt-0 pb-24 md:pb-32 bg-transparent z-10 border-0"
+      className="sticky top-16 flex flex-col min-h-[calc(100vh-4rem)] pt-0 bg-transparent z-10 border-0"
     >
-      <div className="w-full">
-        <div className="px-6 mb-10">
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-black"
-          >
-            Our Services
-          </motion.h2>
-        </div>
-
-        {/* Scroll track - Framer-style horizontal scroll */}
-        <div
-          ref={scrollRef}
-          className="overflow-x-auto overflow-y-hidden snap-x snap-mandatory scrollbar-hide"
+      <div className="shrink-0 px-6 pt-6 pb-4">
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl font-bold text-black"
         >
-          <div className="flex gap-6 pl-6 pr-6 pb-4 min-w-max" style={{ borderBottomWidth: 0 }}>
-            {SERVICES.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="snap-center shrink-0 w-[280px] sm:w-[320px] md:w-[360px]"
-                style={{ opacity: 1, border: "none", borderRadius: 0 }}
-              >
+          Our Services
+        </motion.h2>
+      </div>
+
+      {/* Full-height horizontal scroll area - flexbox method */}
+      <div
+        ref={scrollRef}
+        className="scrolling-wrapper flex-1 min-h-0 px-6 pb-6 snap-x snap-mandatory"
+      >
+        <div className="flex gap-6 flex-nowrap items-stretch min-w-max shrink-0 h-full py-2">
+          {SERVICES.map((service, index) => (
+            <motion.div
+              key={service.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="scrolling-card snap-center flex-[0_0_auto] w-[280px] sm:w-[320px] md:w-[360px]"
+              style={{ opacity: 1, border: "none", borderRadius: 0 }}
+            >
                 <div
                   className="relative w-full h-[320px] sm:h-[360px] md:h-[382px] rounded-lg overflow-hidden bg-transparent"
                   style={{ borderRadius: 8, boxShadow: "none" }}
@@ -180,13 +185,12 @@ export default function SolutionsShowcaseSection() {
               </motion.div>
             ))}
 
-            {/* End spacer - Framer-style border card */}
-            <div
-              className="shrink-0 w-[280px] sm:w-[320px] md:w-[360px] h-[320px] sm:h-[360px] md:h-[382px] rounded-xl border border-gray-200 bg-white"
-              style={{ opacity: 1 }}
-              aria-hidden
-            />
-          </div>
+          {/* End spacer */}
+          <div
+            className="flex-[0_0_auto] w-[280px] sm:w-[320px] md:w-[360px] rounded-xl border border-gray-200 bg-white"
+            style={{ minHeight: 320 }}
+            aria-hidden
+          />
         </div>
       </div>
     </section>

@@ -24,7 +24,7 @@ export default function Navbar() {
                         </Link>
                         <div className="relative group">
                             <Link href="#" className="hover:text-primary transition-colors flex items-center gap-1">
-                                Solutions
+                                Services
                                 <span className="transition-transform duration-200 group-hover:-rotate-180">
                                     <svg
                                         className="w-3 h-3"
@@ -44,11 +44,11 @@ export default function Navbar() {
                             </Link>
                             <div className="absolute left-0 top-full mt-3 w-56 rounded-xl bg-white/95 shadow-lg border border-gray-200 py-3 px-3 text-sm text-gray-800 hidden group-hover:block">
                                 <div className="flex flex-col gap-1.5 text-left">
-                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Artificial Intelligence</button>
+                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Application Development</button>
                                     <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Data Solutions</button>
                                     <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Process Automation</button>
                                     <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Generative AI Services</button>
-                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Application Development</button>
+                                    <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Artificial Intelligence</button>
                                     <button className="w-full text-left px-2 py-1.5 rounded-md hover:bg-gray-100">Business Intelligence</button>
                                 </div>
                             </div>
