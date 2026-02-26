@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import SolutionsShowcaseSection from "@/components/SolutionsShowcaseSection";
 import TrustSection from "@/components/TrustSection";
@@ -13,8 +12,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative">
-      <Navbar />
+    <main className="min-h-screen relative overflow-x-hidden">
       <Hero />
       <SolutionsShowcaseSection />
       <TrustSection />

@@ -8,6 +8,7 @@ const antigravityFont = Outfit({
 });
 
 import InteractiveBackground from "@/components/InteractiveBackground";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Kriyantrai Workspace",
@@ -26,6 +27,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <InteractiveBackground />
+        <Navbar />
         {children}
       </body>
     </html>

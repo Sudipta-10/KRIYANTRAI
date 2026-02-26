@@ -56,3 +56,34 @@ nextjs-portal {
   top: 72px !important;
   left: 8px !important;
 }
+
+/* Horizontal scroll wrapper - flexbox method, smooth touch scroll */
+.scrolling-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto; /* instant for wheel-driven scroll */
+}
+.scrolling-wrapper::-webkit-scrollbar {
+  display: none;
+}
+.scrolling-wrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
